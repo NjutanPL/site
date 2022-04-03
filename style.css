@@ -1,0 +1,207 @@
+
+.cos{
+color: #24262b;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body{
+	line-height: 1.5;
+	font-family: "Helvetica W02 Roman","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.fa {
+    color:#111;
+    font-size:24px
+}
+.acc{
+	background-color: #f4f5f4;
+	color: #111;
+	text-align: right;
+	padding-right: 50px;
+	font-family: "Helvetica W02 Roman","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 13px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+
+}
+
+.navlink{
+	text-align: center;
+	
+}
+
+.acc a:hover{
+	color: #616161;
+}
+.acc :hover{
+	color: #1a1a1a;
+}
+
+.menulink ul li a:hover{
+	color: #616161;
+	text-decoration: none;
+	font-weight: 300;
+	transition: all 0.3s ease;
+}
+
+
+.menulink ul li i:hover{
+	color:  #616161;
+	transition: all 0.3s ease;
+}
+
+
+
+.menu {
+    float: left;
+    background-color: #fffefe;
+    width: 100%;
+    height: 95px;
+    position: relative;
+}
+
+.all{
+    height: 100%;
+    width: 100%;
+    
+}
+.home {
+    background-color: #f4f5f4;;
+    height: 100%;
+    padding-top: 115px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+
+
+/* UL | LI*/
+.menulink ul{
+    width: auto;
+    float: left;
+    margin-top: 5px;
+}
+.menulink li{
+    display: inline-block;
+    padding: 10px 10px;
+}
+.socials li{
+	display: inline-block;
+    padding: 5px 5px;
+}
+
+.menu a{
+    color:#111;
+	
+}
+a{
+	text-decoration: solid;
+}
+
+.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+ul{
+	list-style: none;
+}
+.footer{
+	background-color: #24262b;
+    padding: 50px 0;
+}
+.footer1{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer1 h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer1 ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer1 ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer1 ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+
+#nikevid {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
+  }
+.loginform{
+	font-size: 20px;
+}
+
+.loginform input{
+	width: 20rem;
+}
+.loginform input:focus{
+	border: solid #616161 1px;
+}
+
+.loginform input:focus::placeholder{
+	color: #cbcece;
+	
+	
+}
+
+.lgform{
+	border: solid #616161 1px;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 12px 12px;
+	color: #aaacad; 
+
+}
+
+#zaloguj{
+	background-color: #111;
+	border-radius: 4px;
+	border: 0px solid;
+	text-decoration: none;
+	width: 17%;
+	height: 40px;
+	margin-bottom: 20px;
+	color: white;
+
+}
+
+#zaloguj :hover{
+	cursor: pointer;
+	background-color: #616161;
+}
+
+.loginform p{
+	color:grey;
+	font-size:12px;
+	padding-bottom: 300px;
+}
