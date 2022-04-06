@@ -20,12 +20,17 @@ error_reporting(0);
 
 if (isset($_SESSION['name'])) {
     print '<div class="wybor">
+    <div class="panel">
     <ul>
-    <li>Moje zamówienia<li/>
-    <li>Ustawienia</li>
-    <li><a href="logout">Wyloguj się </a></li>
-
+    <li class="mcli"><a href="account?action=myprofile&orders">Moje zamówienia</a><li/>
+    <li class="mcli">Ustawienia</li>
+    <li class="mcli"><a style="color:#111;text-decoration: underline;" href="logout">Wyloguj się </a></li><br><br><br><br><br><br><br><br><br>
     </div>';
+    if(isset($_GET['action'])){
+        if($_GET['action'] === "myprofile" & $_GET['p'] === "orders"){
+            print "<div class='zamowienia'><p>Moje zamówienia</p></div>";
+        }
+    }
 
 }
 
@@ -33,7 +38,7 @@ if (!isset($_SESSION['name'])) {
     if(isset($_GET['action'])){
     if(($_GET['action'] === 'join_us')){
         print '<div class="loginform">
-        <center><br><br><br><br>
+        <center><br><br>
         <i><img src="nikeswoosh.png" width="2.5%"></i><br><br>
         <b>ZOSTAŃ CZŁONKIEM NIKE</b><br><br>
         <div style="font-size:14px;color:grey;padding-bottom:15px">Utwórz profil członka Nike i uzyskaj dostęp do<br>
@@ -43,10 +48,13 @@ if (!isset($_SESSION['name'])) {
             <input type="email" name="email" class="lgform" placeholder="Adres e-mail" required><br>
             <input type="text" name="imie" class="lgform" placeholder="Imię" required><br>
             <input type="text" name="nazwisko" class="lgform" placeholder="Nazwisko" required><br>
-            <input type="password" name="password" class="lgform" placeholder="Hasło" required><br>
-            <input type="password" name="cpassword" class="lgform" placeholder="Powtórz hasło" required><br>
+            <input type="number" name="tel" class="lgform" placeholder="Numer telefonu" minlength="9" maxlength="9" required><br>
+            <input type="password" name="password" class="lgform" placeholder="Hasło" minlenght="8" required><br>
+            <input type="password" name="cpassword" class="lgform" placeholder="Powtórz hasło" minlength="8" required><br>
+            <p style="color:red;padding-top:10px;padding-bottom:10px;font-size:0px" id="erroremail">Konto z podanym adresem e-mail już istnieje.</p>
+            <p style="color:red;padding-top:10px;padding-bottom:10px;font-size:0px" id="errorpass">Hasła nie są takie same.</p>
             <p style="padding-bottom:20px;padding-top:15px">Klikając "Dołącz do nas", wyrażasz zgodę na <a href="regulamin" style="color:#111;text-decoration: underline;">Regulamin.</a></p>
-            <input type="submit" name="log-in" id="zaloguj" value="DOŁĄCZ DO NAS"><br>
+            <input type="submit" name="joinus" id="zaloguj" value="DOŁĄCZ DO NAS"><br>
             <p>Czy jesteś już członkiem? <a href="?action=log_in" style="color:#111;text-decoration: underline;">Zaloguj się.</a></p>
     </form>
     
@@ -54,7 +62,7 @@ if (!isset($_SESSION['name'])) {
     }
     if(($_GET['action'] !== 'join_us')) {
         print '<div class="loginform">
-        <center><br><br><br><br>
+        <center><br><br>
         <i><img src="nikeswoosh.png" width="2.5%"></i><br><br>
         <b>KONTO UMOŻLIWIAJĄCE <br>
         DOSTĘP DO WSZYSTKICH <br>
@@ -93,11 +101,55 @@ if (isset($_POST['submit'])) {
 	if ($result->num_rows > 0) {
 		$row = mysqli_fetch_assoc($result);
 		$_SESSION['name'] = $row['name'];
-		header("Location: home.php");
+		header("Location: account?action=myprofile");
 	} else {
 		echo '<script>document.getElementById("error").style.fontSize = "12px"</script>';
 	}
 }
+
+if (isset($_POST['joinus'])) {
+	$email = $_POST['email'];
+    $name = $_POST['imie'];
+    $surname = $_POST['nazwisko'];
+	$password = $_POST['password'];
+	$cpassword = $_POST['cpassword'];
+    $tel = $_POST['tel'];
+
+
+
+
+	if ($password == $cpassword) {
+		$sql = "SELECT * FROM users WHERE email='$email'";
+		$result = mysqli_query($conn, $sql);
+		if (!$result->num_rows > 0) {
+			$sql = "INSERT INTO users (email,name,surname,password,tel)
+            VALUES ('$email','$name','$surname','$password','$tel')";
+			$result = mysqli_query($conn, $sql);
+
+
+            $email = $_POST['email'];
+	        $password = ($_POST['password']);
+
+	        $sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+	        $result = mysqli_query($conn, $sql);
+                if ($result->num_rows > 0) {
+                    $row = mysqli_fetch_assoc($result);
+                    $_SESSION['name'] = $row['name'];
+                    header("Location: account?action=myprofile");
+
+                } else {
+		            echo '<script>document.getElementById("error").style.fontSize = "12px"</script>';
+	                }
+
+        
+		} else {
+			echo '<script>document.getElementById("erroremail").style.fontSize = "12px"</script>';
+
+		}} else {
+		    echo '<script>document.getElementById("errorpass").style.fontSize = "12px"</script>';
+	}
+}
+
 
 ?>
 
